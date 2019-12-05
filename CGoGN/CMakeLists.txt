@@ -123,27 +123,31 @@ IF (CGoGN_ONELIB)
 
 ELSE()
 	IF (CGoGN_WITH_QT)
-		add_definitions(-DCGoGN_QT_DLL_EXPORT)
 		add_library( utils ${files_utils_withQt} )
+		target_compile_definitions(utils PRIVATE CGoGN_QT_DLL_EXPORT)
 		qt_use_modules(utils Gui OpenGL Xml Svg)
 	ELSE()
 		add_library( utils ${files_utils} )
 	ENDIF()
+	target_compile_definitions(utils PRIVATE CGoGN_UTILS_DLL_EXPORT)
 	target_link_libraries(utils ${CGoGN_EXT_LIBS})
 
 	add_library( container ${files_container})
+	target_compile_definitions( container PRIVATE CGoGN_TOPO_DLL_EXPORT)
 	target_link_libraries(container utils)
 
 	add_library( topology ${files_topology})
+	target_compile_definitions(topology PRIVATE CGoGN_TOPO_DLL_EXPORT)
 	target_link_libraries(topology container)
 
 	IF (CGoGN_WITH_QT)
-		add_definitions(-DCGoGN_QT_DLL_EXPORT)
 		add_library(  algo	${files_algo_withQt} )
+		target_compile_definitions(algo PRIVATE CGoGN_QT_DLL_EXPORT)
 		qt_use_modules(algo Gui OpenGL Xml Svg)
 	ELSE()
 		add_library( algo	${files_algo} )
 	ENDIF()
+	target_compile_definitions(algo PRIVATE CGoGN_ALGO_DLL_EXPORT)
 	target_link_libraries(algo utils topology)
 
 
