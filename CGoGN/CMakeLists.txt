@@ -132,13 +132,18 @@ ELSE()
 	target_compile_definitions(utils PRIVATE CGoGN_UTILS_DLL_EXPORT)
 	target_link_libraries(utils ${CGoGN_EXT_LIBS})
 
-	add_library( container ${files_container})
-	target_compile_definitions( container PRIVATE CGoGN_TOPO_DLL_EXPORT)
-	target_link_libraries(container utils)
+	set(CONTAINER_NAME container)
+	if(WIN32)
+		set(CONTAINER_NAME cgogn_container)
+	endif()
+	add_library( ${CONTAINER_NAME} ${files_container})
+	target_compile_definitions(${CONTAINER_NAME} PRIVATE CGoGN_CONTAINER_DLL_EXPORT)
+	target_link_libraries(${CONTAINER_NAME} utils)
+
 
 	add_library( topology ${files_topology})
 	target_compile_definitions(topology PRIVATE CGoGN_TOPO_DLL_EXPORT)
-	target_link_libraries(topology container)
+	target_link_libraries(topology ${CONTAINER_NAME})
 
 	IF (CGoGN_WITH_QT)
 		add_library(  algo	${files_algo_withQt} )
