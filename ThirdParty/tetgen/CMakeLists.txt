@@ -11,3 +11,6 @@ add_library(tetgen ${CMAKE_CURRENT_SOURCE_DIR}/tetgen.cxx ${CMAKE_CURRENT_SOURCE
 #Set properties on a target. 
 #We use this here to set -DTETLIBRARY for when compiling the library
 #set_target_properties(tet PROPERTIES "COMPILE_DEFINITIONS" TETLIBRARY)
+
+install(TARGETS tetgen CONFIGURATIONS Debug ARCHIVE DESTINATION lib/Debug LIBRARY DESTINATION lib/Debug RUNTIME DESTINATION bin/Debug)
+install(TARGETS tetgen CONFIGURATIONS Release ARCHIVE DESTINATION lib/Release LIBRARY DESTINATION lib/Release RUNTIME DESTINATION bin/Release)
