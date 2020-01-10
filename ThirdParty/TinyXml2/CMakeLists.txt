@@ -13,12 +13,21 @@ endif(MSVC)
 option(BUILD_SHARED_LIBS "build shared or static libraries" ON)
 add_library(tinyxml2 tinyxml2.cpp tinyxml2.h)
 set_target_properties(tinyxml2 PROPERTIES COMPILE_DEFINITIONS "TINYXML2_EXPORT")
+set_target_properties(tinyxml2 PROPERTIES PUBLIC_HEADER "tinyxml2.h")
 
-
-#install(TARGETS tinyxml2
-#        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-#        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-#        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS tinyxml2
+	CONFIGURATIONS Release
+	LIBRARY DESTINATION lib/Release
+	ARCHIVE DESTINATION lib/Release
+	RUNTIME DESTINATION bin/Release
+	)
+install(TARGETS tinyxml2
+	PUBLIC_HEADER DESTINATION include/tinyxml
+	CONFIGURATIONS Debug
+	LIBRARY DESTINATION lib/Debug
+	ARCHIVE DESTINATION lib/Debug
+	RUNTIME DESTINATION bin/Debug
+	)
 
 #install(FILES tinyxml2.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 

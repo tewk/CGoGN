@@ -159,4 +159,18 @@ ELSE()
 	add_custom_target( Geometry 	SOURCES ${files_geometry} )
 	add_custom_target( ThirdParty 	SOURCES ${files_thirdParty} )
 	add_dependencies( utils shader_target )
+
+	install(TARGETS utils ${CONTAINER_NAME} topology algo
+		CONFIGURATIONS Debug
+		LIBRARY DESTINATION lib/Debug
+		ARCHIVE DESTINATION lib/Debug
+		RUNTIME DESTINATION bin/Debug
+		)
+	install(TARGETS utils ${CONTAINER_NAME} topology algo
+		CONFIGURATIONS Release
+		LIBRARY DESTINATION lib/Release
+		ARCHIVE DESTINATION lib/Release
+		RUNTIME DESTINATION bin/Release
+		)
+	install(DIRECTORY include/ DESTINATION include)
 ENDIF()
