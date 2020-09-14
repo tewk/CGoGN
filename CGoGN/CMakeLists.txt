@@ -26,11 +26,63 @@ file(
 file(
 	GLOB_RECURSE
 	files_algo
-	${CGoGN_SRC_DIR}/src/Algo/*.cpp
-	${CGoGN_SRC_DIR}/src/Algo/*.c
-	${CGoGN_SRC_DIR}/include/Algo/*.hpp
-	${CGoGN_SRC_DIR}/include/Algo/*.h
-)
+	#${CGoGN_SRC_DIR}/src/Algo/*.cpp
+	#${CGoGN_SRC_DIR}/src/Algo/*.c
+	#${CGoGN_SRC_DIR}/include/Algo/*.hpp
+	#${CGoGN_SRC_DIR}/include/Algo/*.h
+	${CGoGN_SRC_DIR}/include/Algo/BooleanOperator/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/BooleanOperator/*.c
+	${CGoGN_SRC_DIR}/include/Algo/Decimation/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/Decimation/*.c
+	${CGoGN_SRC_DIR}/include/Algo/Export/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/Export/*.c
+	${CGoGN_SRC_DIR}/include/Algo/Filtering/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/Filtering/*.c
+	${CGoGN_SRC_DIR}/include/Algo/Geometry/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/Geometry/*.c
+	#${CGoGN_SRC_DIR}/include/Algo/Histogram/*.cpp
+	#${CGoGN_SRC_DIR}/include/Algo/Histogram/*.c
+	${CGoGN_SRC_DIR}/include/Algo/ImplicitHierarchicalMesh/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/ImplicitHierarchicalMesh/*.c
+	${CGoGN_SRC_DIR}/include/Algo/Import/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/Import/*.c
+	${CGoGN_SRC_DIR}/include/Algo/LinearSolving/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/LinearSolving/*.c
+	#${CGoGN_SRC_DIR}/include/Algo/MC/*.cpp
+	#${CGoGN_SRC_DIR}/include/Algo/MC/*.c
+	${CGoGN_SRC_DIR}/include/Algo/Modelisation/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/Modelisation/*.c
+	${CGoGN_SRC_DIR}/include/Algo/MovingObjects/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/MovingObjects/*.c
+	${CGoGN_SRC_DIR}/include/Algo/Multiresolution/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/Multiresolution/*.c
+	${CGoGN_SRC_DIR}/include/Algo/ProgressiveMesh/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/ProgressiveMesh/*.c
+	${CGoGN_SRC_DIR}/include/Algo/Remeshing/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/Remeshing/*.c
+	#${CGoGN_SRC_DIR}/include/Algo/Render/*.cpp
+	#${CGoGN_SRC_DIR}/include/Algo/Render/*.c
+	${CGoGN_SRC_DIR}/include/Algo/Selection/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/Selection/*.c
+	${CGoGN_SRC_DIR}/include/Algo/Simulation/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/Simulation/*.c
+	${CGoGN_SRC_DIR}/include/Algo/Tiling/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/Tiling/*.c
+	${CGoGN_SRC_DIR}/include/Algo/Topo/*.cpp
+	${CGoGN_SRC_DIR}/include/Algo/Topo/*.c
+	
+	
+	#${CGoGN_SRC_DIR}/src/Algo/Histogram/*.cpp
+	#${CGoGN_SRC_DIR}/src/Algo/Histogram/*.c
+	${CGoGN_SRC_DIR}/src/Algo/ImplicitHierarchicalMesh/*.cpp
+	${CGoGN_SRC_DIR}/src/Algo/ImplicitHierarchicalMesh/*.c
+	${CGoGN_SRC_DIR}/src/Algo/Import/*.cpp
+	${CGoGN_SRC_DIR}/src/Algo/Import/*.c
+	#${CGoGN_SRC_DIR}/src/Algo/MC/*.cpp
+	#${CGoGN_SRC_DIR}/src/Algo/MC/*.c
+	#${CGoGN_SRC_DIR}/src/Algo/Render/*.cpp
+	#${CGoGN_SRC_DIR}/src/Algo/Render/*.c
+	)
 
 IF(CGoGN_WITH_QT)
 	qt_wrap_cpp(ALGO_QT_HEADERS_MOC ${CGoGN_SRC_DIR}/include/Algo/Histogram/qthistodraw.h)
@@ -63,13 +115,16 @@ add_dependencies(shader_target shader_to_h) #ensure that shader_to_h is compiled
 file(
 	GLOB		# WARNING NO MORE RECURSE TO AVOID TAKING QT FILES
 	files_utils
-	${CGoGN_SRC_DIR}/src/Utils/*.cpp
-	${CGoGN_SRC_DIR}/include/Utils/*.hpp
-	${CGoGN_SRC_DIR}/include/Utils/*.h
+	#${CGoGN_SRC_DIR}/src/Utils/*.cpp
+	#${CGoGN_SRC_DIR}/include/Utils/*.hpp
+	#${CGoGN_SRC_DIR}/include/Utils/*.h
+	${CGoGN_SRC_DIR}/inclue/Utils/cgognStream.h
+	${CGoGN_SRC_DIR}/src/Utils/cgognStream.cpp
+	${CGoGN_SRC_DIR}/src/Utils/cgognStream.h
 
-	${CGoGN_SRC_DIR}/src/Utils/Shaders/*.cpp
-	${CGoGN_SRC_DIR}/include/Utils/Shaders/*.hpp
-	${CGoGN_SRC_DIR}/include/Utils/Shaders/*.h
+	#${CGoGN_SRC_DIR}/src/Utils/Shaders/*.cpp
+	#${CGoGN_SRC_DIR}/include/Utils/Shaders/*.hpp
+	#${CGoGN_SRC_DIR}/include/Utils/Shaders/*.h
 )
 
 IF(CGoGN_WITH_QT)
@@ -118,7 +173,7 @@ IF (CGoGN_ONELIB)
 	ELSE()
 		add_library( cgogn ${files_topology} ${files_container} ${files_algo} ${files_utils} )
 	ENDIF()
-	add_dependencies(cgogn shader_target)
+	#add_dependencies(cgogn shader_target)
 	target_link_libraries(cgogn ${CGoGN_EXT_LIBS})
 
 ELSE()
@@ -129,8 +184,8 @@ ELSE()
 	ELSE()
 		add_library( utils ${files_utils} )
 	ENDIF()
-	target_compile_definitions(utils PRIVATE CGoGN_UTILS_DLL_EXPORT)
-	target_link_libraries(utils ${CGoGN_EXT_LIBS})
+	#target_compile_definitions(utils PRIVATE CGoGN_UTILS_DLL_EXPORT)
+	#target_link_libraries(utils ${CGoGN_EXT_LIBS})
 
 	set(CONTAINER_NAME container)
 	if(WIN32)
@@ -138,7 +193,7 @@ ELSE()
 	endif()
 	add_library( ${CONTAINER_NAME} ${files_container})
 	target_compile_definitions(${CONTAINER_NAME} PRIVATE CGoGN_CONTAINER_DLL_EXPORT)
-	target_link_libraries(${CONTAINER_NAME} utils)
+	#target_link_libraries(${CONTAINER_NAME} utils)
 
 
 	add_library( topology ${files_topology})
@@ -153,20 +208,25 @@ ELSE()
 		add_library( algo	${files_algo} )
 	ENDIF()
 	target_compile_definitions(algo PRIVATE CGoGN_ALGO_DLL_EXPORT)
-	target_link_libraries(algo utils topology)
+	target_link_libraries(algo topology)
+	#target_link_libraries(algo utils topology)
 
 
-	add_custom_target( Geometry 	SOURCES ${files_geometry} )
-	add_custom_target( ThirdParty 	SOURCES ${files_thirdParty} )
-	add_dependencies( utils shader_target )
+	#add_custom_target( Geometry 	SOURCES ${files_geometry} )
+	#add_custom_target( ThirdParty 	SOURCES ${files_thirdParty} )
+	#add_dependencies( utils shader_target )
 
-	install(TARGETS utils ${CONTAINER_NAME} topology algo
+	install(TARGETS 
+		#utils 
+		${CONTAINER_NAME} topology algo
 		CONFIGURATIONS Debug
 		LIBRARY DESTINATION lib/Debug
 		ARCHIVE DESTINATION lib/Debug
 		RUNTIME DESTINATION bin/Debug
 		)
-	install(TARGETS utils ${CONTAINER_NAME} topology algo
+	install(TARGETS 
+		#utils 
+		${CONTAINER_NAME} topology algo
 		CONFIGURATIONS Release
 		LIBRARY DESTINATION lib/Release
 		ARCHIVE DESTINATION lib/Release

@@ -17,7 +17,7 @@ INCLUDE(${CGoGN_ROOT_DIR}/cmake_modules/functions.cmake)
 #
 SET ( CGoGN_WITH_ASSIMP OFF CACHE BOOL "build CGoGN with Assimp" )
 SET ( CGoGN_WITH_ZINRI OFF CACHE BOOL "build CGoGN with Zinri lib" )
-SET ( CGoGN_WITH_QT ON CACHE BOOL "build CGoGN with Qt lib" )
+SET ( CGoGN_WITH_QT OFF CACHE BOOL "build CGoGN with Qt lib" )
 SET ( CGoGN_DESIRED_QT_VERSION "4" CACHE STRING "4: QT4/5" )
 SET ( CGoGN_WITH_GLEWMX OFF CACHE BOOL "use multi-contex GLEW (for VRJuggler)" )
 SET ( CGoGN_USE_OGL_CORE_PROFILE OFF CACHE BOOL "use OpenGL 3.3 core profile (do not work on mac)" )
@@ -58,9 +58,9 @@ IF(WIN32)
 	SET ( CMAKE_PREFIX_PATH ${CGoGN_ROOT_DIR}/windows_dependencies CACHE STRING "path to dependencies" )
 ENDIF(WIN32)
 
-FIND_PACKAGE(OpenGL REQUIRED)
-FIND_PACKAGE(ZLIB REQUIRED)
-FIND_PACKAGE(GLEW REQUIRED)
+FIND_PACKAGE(OpenGL)
+FIND_PACKAGE(ZLIB)
+FIND_PACKAGE(GLEW)
 IF (CGoGN_WITH_QT)
 	IF(${CGoGN_DESIRED_QT_VERSION} STREQUAL "5")
 		include(cmake_modules/Qt_5x.cmake)
@@ -68,14 +68,14 @@ IF (CGoGN_WITH_QT)
 		include(cmake_modules/Qt_4x.cmake)
 	ENDIF()
 ELSE ()
-	FIND_PACKAGE(DevIL REQUIRED)
+	FIND_PACKAGE(DevIL)
 ENDIF()
 
 IF (WIN32)
 	set(SUITESPARSE_SUITESPARSECONFIG_INCLUDE_DIR  ${CGoGN_ROOT_DIR}/windows_dependencies/include)
 	set(SUITESPARSE_USE_LAPACK_BLAS ON)
 ENDIF()
-FIND_PACKAGE(SuiteSparse REQUIRED)
+FIND_PACKAGE(SuiteSparse)
 
 #
 #	ThirdParty
@@ -83,11 +83,11 @@ FIND_PACKAGE(SuiteSparse REQUIRED)
 
 INCLUDE_DIRECTORIES(${CGoGN_ROOT_DIR}/ThirdParty/include)
 
-ADD_SUBDIRECTORY(ThirdParty/Tools)
+#ADD_SUBDIRECTORY(ThirdParty/Tools)
 
-ADD_SUBDIRECTORY(ThirdParty/OpenNL)
+#ADD_SUBDIRECTORY(ThirdParty/OpenNL)
 
-ADD_SUBDIRECTORY(ThirdParty/tetgen)
+#ADD_SUBDIRECTORY(ThirdParty/tetgen)
 
 IF (CGoGN_WITH_ZINRI)
 	ADD_SUBDIRECTORY(ThirdParty/Zinri)
@@ -97,7 +97,7 @@ IF (CGoGN_WITH_ASSIMP)
 	ADD_SUBDIRECTORY(ThirdParty/Assimp)
 ENDIF ()
 
-ADD_SUBDIRECTORY(ThirdParty/TinyXml2)
+#ADD_SUBDIRECTORY(ThirdParty/TinyXml2)
 
 #IF (CGoGN_WITH_QT AND (NOT WIN32))
 IF (CGoGN_WITH_QT)
@@ -105,7 +105,7 @@ IF (CGoGN_WITH_QT)
 ENDIF()
 
 IF (NOT WIN32)
-	ADD_SUBDIRECTORY(ThirdParty/libuuid)
+	#	ADD_SUBDIRECTORY(ThirdParty/libuuid)
 ENDIF()
 
 
@@ -189,8 +189,8 @@ IF (CGoGN_WITH_QT)
         LIST(APPEND CGoGN_EXT_LIBS QGLViewer ${QT_LIBRARIES})
 		LIST(APPEND CGoGN_EXT_INCLUDES ${CGoGN_ROOT_DIR}/ThirdParty/libQGLViewer/)
 ELSE ()
-	 LIST(APPEND CGoGN_EXT_INCLUDES ${IL_INCLUDE_DIR})
-	 LIST(APPEND CGoGN_EXT_LIBS ${IL_LIBRARIES})
+	#LIST(APPEND CGoGN_EXT_INCLUDES ${IL_INCLUDE_DIR})
+	#LIST(APPEND CGoGN_EXT_LIBS ${IL_LIBRARIES})
 ENDIF ()
 
 # define includes of external libs 
@@ -298,7 +298,7 @@ endforeach()
 
 add_subdirectory(${CGoGN_SRC_DIR} CGoGN)
 
-add_subdirectory(${CGoGN_ROOT_DIR}/Apps Apps)
+#add_subdirectory(${CGoGN_ROOT_DIR}/Apps Apps)
 
 
 # 
