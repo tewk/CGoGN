@@ -121,6 +121,8 @@ file(
 	${CGoGN_SRC_DIR}/inclue/Utils/cgognStream.h
 	${CGoGN_SRC_DIR}/src/Utils/cgognStream.cpp
 	${CGoGN_SRC_DIR}/src/Utils/cgognStream.h
+	${CGoGN_SRC_DIR}/src/Utils/gzstream.cpp
+	${CGoGN_SRC_DIR}/src/Utils/gzstream.h
 
 	#${CGoGN_SRC_DIR}/src/Utils/Shaders/*.cpp
 	#${CGoGN_SRC_DIR}/include/Utils/Shaders/*.hpp

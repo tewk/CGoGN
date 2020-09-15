@@ -30,7 +30,7 @@
 
 const unsigned int _BLOCKSIZE_ = 4096;
 
-#define COREFORM_DONT_USE_GZ_STREAMS
+#undef COREFORM_DONT_USE_GZ_STREAMS
 #ifdef COREFORM_DONT_USE_GZ_STREAMS
 
 typedef std::ifstream CGoGNistream;
