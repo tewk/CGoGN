@@ -30,11 +30,18 @@
 
 const unsigned int _BLOCKSIZE_ = 4096;
 
-//typedef std::ifstream CGoGNistream;
-//typedef std::ofstream CGoGNostream;
+#define COREFORM_DONT_USE_GZ_STREAMS
+#ifdef COREFORM_DONT_USE_GZ_STREAMS
+
+typedef std::ifstream CGoGNistream;
+typedef std::ofstream CGoGNostream;
+
+#else
 
 /// use everywhere in save/load compressed stream
 typedef igzstream CGoGNistream;
 typedef ogzstream CGoGNostream;
+
+#endif
 
 #endif /* SIZEBLOCK_H_ */

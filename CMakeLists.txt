@@ -10,8 +10,6 @@ SET ( CMAKE_MODULE_PATH ${CGoGN_ROOT_DIR}/cmake_modules/ )
 
 INCLUDE(${CGoGN_ROOT_DIR}/cmake_modules/functions.cmake)
 
-
-
 #
 # Available options
 #

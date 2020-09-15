@@ -193,7 +193,7 @@ ELSE()
 	endif()
 	add_library( ${CONTAINER_NAME} ${files_container})
 	target_compile_definitions(${CONTAINER_NAME} PRIVATE CGoGN_CONTAINER_DLL_EXPORT)
-	#target_link_libraries(${CONTAINER_NAME} utils)
+	target_link_libraries(${CONTAINER_NAME} utils)
 
 
 	add_library( topology ${files_topology})
@@ -208,8 +208,7 @@ ELSE()
 		add_library( algo	${files_algo} )
 	ENDIF()
 	target_compile_definitions(algo PRIVATE CGoGN_ALGO_DLL_EXPORT)
-	target_link_libraries(algo topology)
-	#target_link_libraries(algo utils topology)
+	target_link_libraries(algo utils topology)
 
 
 	#add_custom_target( Geometry 	SOURCES ${files_geometry} )
@@ -218,7 +217,7 @@ ELSE()
 
 	# We don't want debug and release folders. With conda you will 
 	# Switch out the package if you want a debug library
-	install(TARGETS ${CONTAINER_NAME} topology algo
+	install(TARGETS ${CONTAINER_NAME} topology algo utils
 		LIBRARY DESTINATION lib
 		ARCHIVE DESTINATION lib
 		RUNTIME DESTINATION bin
