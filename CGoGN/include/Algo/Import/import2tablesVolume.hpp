@@ -29,7 +29,7 @@
 //#include <libxml/parser.h>
 
 //#include <tinyxml2.h>
-#include "Utils/xml.h"
+//#include "Utils/xml.h"
 
 namespace CGoGN
 {
@@ -109,9 +109,9 @@ bool MeshTablesVolume<PFP>::importMesh(const std::string& filename, std::vector<
 		case MSH:
 			return importMSH(filename, attrNames);
 			break;
-		case VTU:
-			return importVTU(filename, attrNames);
-			break;
+		//case VTU:
+		//	return importVTU(filename, attrNames);
+		//	break;
 		case NAS:
 			return importNAS(filename, attrNames);
 			break;
@@ -1708,7 +1708,7 @@ bool MeshTablesVolume<PFP>::importVBGZ(const std::string& filename, std::vector<
 //}
 
 
-
+#if 0
 template <typename PFP>
 bool MeshTablesVolume<PFP>::importVTU(const std::string& filename, std::vector<std::string>& attrNames)
 {
@@ -1910,6 +1910,7 @@ bool MeshTablesVolume<PFP>::importVTU(const std::string& filename, std::vector<s
 
 	return true;
 }
+#endif
 
 } // namespace Import
 

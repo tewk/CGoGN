@@ -201,7 +201,7 @@ private:
 
     bool importMSH(const std::string& filename, std::vector<std::string>& attrNames);
 
-    bool importVTU(const std::string& filename, std::vector<std::string>& attrNames);
+    //bool importVTU(const std::string& filename, std::vector<std::string>& attrNames);
 
     bool importNAS(const std::string& filename, std::vector<std::string>& attrNames);
 

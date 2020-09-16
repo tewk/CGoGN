@@ -25,12 +25,14 @@
 #ifndef _SIZEBLOCK_H_
 #define _SIZEBLOCK_H_
 
+#define COREFORM_DONT_USE_GZ_STREAMS
+#ifdef COREFORM_DONT_USE_GZ_STREAMS
 #include "Utils/gzstream.h"
+#endif
 #include "Utils/cgognStream.h"
 
 const unsigned int _BLOCKSIZE_ = 4096;
 
-#undef COREFORM_DONT_USE_GZ_STREAMS
 #ifdef COREFORM_DONT_USE_GZ_STREAMS
 
 typedef std::ifstream CGoGNistream;
