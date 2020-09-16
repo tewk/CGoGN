@@ -5,8 +5,7 @@ project(CGoGN_LIB)
 # for shaders
 include_directories( ${CMAKE_CURRENT_BINARY_DIR} 	)
 
-
-
+add_compile_options(-Wno-deprecated-copy) #-H)  # spit out the headers processed
 
 file( GLOB_RECURSE headers_topology
 	${CGoGN_SRC_DIR}/include/Topology/*.hpp
@@ -41,8 +40,8 @@ file( GLOB_RECURSE headers_algo
 	#${CGoGN_SRC_DIR}/include/Algo/BooleanOperator/*.h
 	#${CGoGN_SRC_DIR}/include/Algo/Decimation/*.hpp
 	#${CGoGN_SRC_DIR}/include/Algo/Decimation/*.h
-	#${CGoGN_SRC_DIR}/include/Algo/Export/*.hpp
-	#${CGoGN_SRC_DIR}/include/Algo/Export/*.h
+	${CGoGN_SRC_DIR}/include/Algo/Export/*.hpp
+	${CGoGN_SRC_DIR}/include/Algo/Export/*.h
 	#${CGoGN_SRC_DIR}/include/Algo/Filtering/*.hpp
 	#${CGoGN_SRC_DIR}/include/Algo/Filtering/*.h
 	${CGoGN_SRC_DIR}/include/Algo/Geometry/*.hpp
@@ -55,10 +54,10 @@ file( GLOB_RECURSE headers_algo
 	${CGoGN_SRC_DIR}/include/Algo/Import/*.h
 	#${CGoGN_SRC_DIR}/include/Algo/LinearSolving/*.hpp
 	#${CGoGN_SRC_DIR}/include/Algo/LinearSolving/*.h
-	#${CGoGN_SRC_DIR}/include/Algo/MC/*.hpp
-	#${CGoGN_SRC_DIR}/include/Algo/MC/*.h
-	#${CGoGN_SRC_DIR}/include/Algo/Modelisation/*.hpp
-	#${CGoGN_SRC_DIR}/include/Algo/Modelisation/*.h
+	${CGoGN_SRC_DIR}/include/Algo/MC/*.hpp
+	${CGoGN_SRC_DIR}/include/Algo/MC/*.h
+	${CGoGN_SRC_DIR}/include/Algo/Modelisation/*.hpp
+	${CGoGN_SRC_DIR}/include/Algo/Modelisation/*.h
 	#${CGoGN_SRC_DIR}/include/Algo/MovingObjects/*.hpp
 	#${CGoGN_SRC_DIR}/include/Algo/MovingObjects/*.h
 	#${CGoGN_SRC_DIR}/include/Algo/Multiresolution/*.hpp
@@ -75,11 +74,10 @@ file( GLOB_RECURSE headers_algo
 	#${CGoGN_SRC_DIR}/include/Algo/Simulation/*.h
 	${CGoGN_SRC_DIR}/include/Algo/Tiling/*.hpp
 	${CGoGN_SRC_DIR}/include/Algo/Tiling/*.h
-	###${CGoGN_SRC_DIR}/include/Algo/Topo/*.hpp
-	###${CGoGN_SRC_DIR}/include/Algo/Topo/*.h
+	${CGoGN_SRC_DIR}/include/Algo/Topo/*.hpp
+	${CGoGN_SRC_DIR}/include/Algo/Topo/*.h
 	)
 	
-# Algo library has been reduced to header only
 file( GLOB_RECURSE srcs_algo
 	#${CGoGN_SRC_DIR}/src/Algo/Histogram/*.cpp
 	#${CGoGN_SRC_DIR}/src/Algo/Histogram/*.c
@@ -87,6 +85,8 @@ file( GLOB_RECURSE srcs_algo
 	#${CGoGN_SRC_DIR}/src/Algo/ImplicitHierarchicalMesh/*.c
 	#${CGoGN_SRC_DIR}/src/Algo/Import/*.cpp
 	#${CGoGN_SRC_DIR}/src/Algo/Import/*.c
+	${CGoGN_SRC_DIR}/src/Algo/Import/importPlyData.cpp
+	${CGoGN_SRC_DIR}/src/Algo/Import/ply.c
 	#${CGoGN_SRC_DIR}/src/Algo/MC/*.cpp
 	#${CGoGN_SRC_DIR}/src/Algo/MC/*.c
 	#${CGoGN_SRC_DIR}/src/Algo/Render/*.cpp
@@ -123,8 +123,9 @@ ELSE()
 ENDIF()
 add_dependencies(shader_target shader_to_h) #ensure that shader_to_h is compiled
 
-file( GLOB headers_utils # WARNING NO MORE RECURSE TO AVOID TAKING QT FILES
+file( GLOB srcs_utils # WARNING NO MORE RECURSE TO AVOID TAKING QT FILES
 	#${CGoGN_SRC_DIR}/src/Utils/*.cpp
+	${CGoGN_SRC_DIR}/src/Utils/gzstream.cpp
 	${CGoGN_SRC_DIR}/src/Utils/cgognStream.cpp
 
 	#${CGoGN_SRC_DIR}/src/Utils/Shaders/*.cpp
@@ -135,7 +136,18 @@ file( GLOB headers_utils # WARNING NO MORE RECURSE TO AVOID TAKING QT FILES
 	${CGoGN_SRC_DIR}/include/Utils/static_assert.h
 	${CGoGN_SRC_DIR}/include/Utils/nameTypes.h
 	${CGoGN_SRC_DIR}/include/Utils/dll.h
+	${CGoGN_SRC_DIR}/include/Utils/mark.h
 	${CGoGN_SRC_DIR}/include/Utils/cgognStream.h
+	${CGoGN_SRC_DIR}/include/Utils/threadbarrier.h
+
+	${CGoGN_SRC_DIR}/include/Utils/GLSLShader.h
+	${CGoGN_SRC_DIR}/include/Utils/gl_def.h
+	${CGoGN_SRC_DIR}/include/Utils/os_spec.h
+	${CGoGN_SRC_DIR}/include/Utils/vbo_base.h
+	${CGoGN_SRC_DIR}/include/Utils/gl_matrices.h
+
+	${CGoGN_SRC_DIR}/include/Utils/compress.h
+	${CGoGN_SRC_DIR}/include/Utils/img3D_IO.h
 
 	#${CGoGN_SRC_DIR}/include/Utils/*.hpp
 	#${CGoGN_SRC_DIR}/include/Utils/*.h

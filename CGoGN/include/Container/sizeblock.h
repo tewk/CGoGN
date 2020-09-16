@@ -25,8 +25,8 @@
 #ifndef _SIZEBLOCK_H_
 #define _SIZEBLOCK_H_
 
-#define COREFORM_DONT_USE_GZ_STREAMS
-#ifdef COREFORM_DONT_USE_GZ_STREAMS
+#undef COREFORM_DONT_USE_GZ_STREAMS
+#ifndef COREFORM_DONT_USE_GZ_STREAMS
 #include "Utils/gzstream.h"
 #endif
 #include "Utils/cgognStream.h"
