@@ -56,9 +56,9 @@ IF(WIN32)
 	SET ( CMAKE_PREFIX_PATH ${CGoGN_ROOT_DIR}/windows_dependencies CACHE STRING "path to dependencies" )
 ENDIF(WIN32)
 
-FIND_PACKAGE(OpenGL)
+#FIND_PACKAGE(OpenGL)
 FIND_PACKAGE(ZLIB)
-FIND_PACKAGE(GLEW)
+#FIND_PACKAGE(GLEW)
 IF (CGoGN_WITH_QT)
 	IF(${CGoGN_DESIRED_QT_VERSION} STREQUAL "5")
 		include(cmake_modules/Qt_5x.cmake)
@@ -66,14 +66,14 @@ IF (CGoGN_WITH_QT)
 		include(cmake_modules/Qt_4x.cmake)
 	ENDIF()
 ELSE ()
-	FIND_PACKAGE(DevIL)
+	#FIND_PACKAGE(DevIL)
 ENDIF()
 
 IF (WIN32)
 	set(SUITESPARSE_SUITESPARSECONFIG_INCLUDE_DIR  ${CGoGN_ROOT_DIR}/windows_dependencies/include)
 	set(SUITESPARSE_USE_LAPACK_BLAS ON)
 ENDIF()
-FIND_PACKAGE(SuiteSparse)
+#FIND_PACKAGE(SuiteSparse)
 
 #
 #	ThirdParty
