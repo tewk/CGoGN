@@ -5,7 +5,7 @@ project(CGoGN_LIB)
 # for shaders
 include_directories( ${CMAKE_CURRENT_BINARY_DIR} 	)
 
-add_compile_options(-Wno-deprecated-copy) #-H)  # spit out the headers processed
+#add_compile_options(-Wno-deprecated-copy) #-H)  # spit out the headers processed
 
 file( GLOB_RECURSE headers_topology
 	${CGoGN_SRC_DIR}/include/Topology/*.hpp
@@ -206,6 +206,16 @@ IF (CGoGN_ONELIB)
 		qt_use_modules(cgogn Gui OpenGL Xml Svg)
 	ELSE()
 		add_library(cgogn ${cgogn_files})
+		if( APPLE )
+			find_library( ZLIB NAMES z PATHS ${CMAKE_CURRENT_SOURCE_DIR}/../../../zlib/lib REQUIRED NO_DEFAULT_PATH )
+		elseif( UNIX )
+			find_library( ZLIB NAMES z REQUIRED)
+		elseif( IS_WINDOWS )
+			set( ZLIB_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../../../zlib/lib )
+			find_package( ZLIB )
+			find_library( ZLIB NAMES zlib.lib PATHS ${CMAKE_CURRENT_SOURCE_DIR}/../../../zlib/lib REQUIRED )
+		endif()
+		target_link_libraries( cgogn ${ZLIB})
 	ENDIF()
 
 	# Turn off external libraries as part of minimal build
@@ -224,7 +234,19 @@ ELSE()
 		target_compile_definitions(utils PRIVATE CGoGN_QT_DLL_EXPORT)
 		qt_use_modules(utils Gui OpenGL Xml Svg)
 	ELSE()
+		if( APPLE )
+			find_library( ZLIB NAMES z PATHS ${CMAKE_CURRENT_SOURCE_DIR}/../../../zlib/lib REQUIRED NO_DEFAULT_PATH )
+		elseif( UNIX )
+			find_library( ZLIB NAMES z REQUIRED)
+		elseif( IS_WINDOWS )
+			set( ZLIB_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../../../zlib/lib )
+			find_package( ZLIB )
+			find_library( ZLIB NAMES zlib.lib PATHS ${CMAKE_CURRENT_SOURCE_DIR}/../../../zlib/lib REQUIRED )
+		endif()
+		#file(TO_CMAKE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../../../../zlib/lib" MY_DIR_VAR)
+		#message( STATUS "ZLIB ${ZLIB} ${CMAKE_CURRENT_SOURCE_DIR} ${MY_DIR_VAR} " )
 		add_library( utils ${files_utils} )
+		target_link_libraries(utils ${ZLIB})
 	ENDIF()
 	#target_compile_definitions(utils PRIVATE CGoGN_UTILS_DLL_EXPORT)
 	#target_link_libraries(utils ${CGoGN_EXT_LIBS})
